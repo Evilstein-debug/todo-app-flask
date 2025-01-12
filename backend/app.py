@@ -5,6 +5,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import pytz
 
 #SQLAlchemy is an ORM (object relational mapper) ORM is a tool that allows developers to interact
 #with databases using object-oriented programming instead of writing raw SQL queries.
@@ -12,9 +13,12 @@ from datetime import datetime
 #Define tables as Python classes.
 #Access rows as Python objects.
 
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
 app.config[ 'SQLALCHEMY_DATABASE_URI' ] = 'sqlite:///test.db' #/// is relative path, //// is absolute path
 db = SQLAlchemy(app)
+
+#set local timezone
+local_tz = pytz.timezone('Asia/Kolkata')
 
 @app.cli.command("create-db")
 def create_db():
@@ -42,8 +46,14 @@ def index():
         except:
             return 'There was an issue adding your task.'
     else:
-        tasks = Todo.query.order_by(Todo.data_created).all()
-        return render_template('index.html', tasks=tasks)
+        try:
+            tasks = Todo.query.order_by(Todo.data_created).all()
+            # convert UTC to local timezone
+            for task in tasks:
+                task.data_created = task.data_created.replace(tzinfo=pytz.utc).astimezone(local_tz)
+            return render_template('index.html', tasks=tasks)
+        except:
+            return 'There was an issue displaying your tasks.'
     
 @app.route('/delete/<int:id>')
 def delete(id):
