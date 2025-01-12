@@ -1,0 +1,46 @@
+body {
+    margin: 10;
+    font-family: sans-serif;
+    background-color: beige;
+}
+
+h1{
+    padding:10px;
+    display: flex;
+    justify-content: center;
+    font-family: monospace;
+    font-size:xx-large;
+}
+
+h4{
+    font-family: monospace;
+    font-size: large;
+}
+
+form{
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+input{
+    background-color:bisque;
+    font-family: monospace;
+}
+
+
+
+table {
+    margin: 0 auto; /* Centers the table horizontally */
+    border-collapse: collapse; /* Optional: makes borders collapse for a cleaner look */
+    width: 50%; /* Optional: controls the width of the table */
+    border-width:medium;
+    border-color:black;
+}
+
+th, td {
+    border: 1px solid black; /* Optional: adds a border for better visibility */
+    padding: 10px; /* Adds space inside table cells */
+    text-align: center; /* Centers text inside the cells */
+    font-family: monospace;
+}

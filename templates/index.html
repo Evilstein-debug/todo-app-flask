@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Tasks</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+
+    <h1 style="text-align: center;">Todo Flask</h1>
+    
+      {% if tasks|length < 1 %}
+    <h4 style="text-align: center;">No tasks are added. Create one below!</h4>
+    {% else %}
+    <table border=1 frame=box rules=all style="width:40%">
+        <tr>
+            <th>Task</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.content }}</td>
+            <td>{{ task.data_created.strftime('%b %d, %Y %I:%M %p') }}</td>
+            <td>
+                <a href="/update/{{task.id}}">Update</a>
+                <br>
+                <a href="/delete/{{task.id}}">Done</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <form action="/" method="post">
+        <input type="text" name="content" id="content">
+        <input type="submit" value="Add Task">
+    </form>
+</div>
+{% endblock %}
