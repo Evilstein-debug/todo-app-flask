@@ -22,12 +22,12 @@ https://todo-app-flask-g8uk.onrender.com
 2. Create and activate a virtual environment:
     ```sh
     python -m venv env
-    source env/bin/activate  # On Windows use `env\Scripts\activate`
+    source env/bin/activate  # On Windows use `.env\Scripts\activate`
     ```
 
 3. Install the dependencies:
     ```sh
-    pip install -r backend/requirements.txt
+    pip install -r requirements.txt
     ```
 
 4. Create the database:
@@ -57,7 +57,7 @@ The app is hosted on Render. To deploy the app, follow these steps:
 3. Create a new web service on Render and connect it to your Git repository.
 
 4. Set the build and start commands:
-    - Build Command: `pip install -r backend/requirements.txt`
+    - Build Command: `pip install -r requirements.txt`
     - Start Command: `gunicorn app:app`
 
 5. Deploy the app.
